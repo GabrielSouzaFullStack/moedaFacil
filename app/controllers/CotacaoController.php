@@ -10,6 +10,6 @@ class CotacaoController
   {
     $obEconomia = new Economia();
     $data = $obEconomia->consultarCotacao('USD');
-    include __DIR__  . '/../views/cotacao-view.php';
+    include __DIR__ . '/../views/cotacao-view.php';
   }
 }
