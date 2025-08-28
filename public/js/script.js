@@ -1,5 +1,5 @@
 async function renderizarCotacao() {
-  await fetch("index.php")
+  await fetch("public/index.php")
     .then((res) => res.text())
     .then((data) => {
       document.getElementById("cotacao").innerHTML = data;
