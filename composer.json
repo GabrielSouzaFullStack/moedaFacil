@@ -2,7 +2,7 @@
     "name": "projeto-integrador/ucs",
     "autoload": {
         "psr-4": {
-            "App\\": "App/"
+            "App\\": "app/"
         }
     },
     "require": {

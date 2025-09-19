@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="gradientMain" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0050B3" />
+      <stop offset="100%" stop-color="#33AEFF" />
+    </linearGradient>
+    <linearGradient id="gradientText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#001F54" />
+      <stop offset="100%" stop-color="#0077CC" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Fundo refinado com gradiente mais suave -->
+  <circle cx="100" cy="100" r="90" fill="#ffffff" filter="url(#shadow)" />
+
+  <!-- Círculo externo mais fino e elegante -->
+  <circle cx="100" cy="100" r="88" fill="none" stroke="url(#gradientMain)" stroke-width="3" />
+
+  <!-- Símbolo elegante no centro -->
+  <path d="M100,40 L120,70 L100,100 L80,70 Z" fill="url(#gradientMain)" opacity="0.2" />
+
+  <!-- Texto principal com fonte mais elegante -->
+  <text x="100" y="80" font-family="'Segoe UI', Helvetica, sans-serif" font-size="24" font-weight="600" letter-spacing="1" text-anchor="middle" fill="url(#gradientText)" filter="url(#shadow)">MOEDA</text>
+  <text x="100" y="108" font-family="'Segoe UI', Helvetica, sans-serif" font-size="24" font-weight="600" letter-spacing="1" text-anchor="middle" fill="url(#gradientText)" filter="url(#shadow)">FÁCIL</text>
+
+  <!-- Linha separadora elegante -->
+  <line x1="70" y1="93" x2="130" y2="93" stroke="url(#gradientMain)" stroke-width="1.5" stroke-linecap="round" />
+
+  <!-- Símbolos de moedas mais integrados e sofisticados -->
+  <g transform="translate(100, 100)">
+    <!-- Círculos com borda e gradiente -->
+    <circle cx="-40" cy="25" r="15" fill="white" stroke="url(#gradientMain)" stroke-width="1.5" />
+    <circle cx="0" cy="25" r="15" fill="white" stroke="url(#gradientMain)" stroke-width="1.5" />
+    <circle cx="40" cy="25" r="15" fill="white" stroke="url(#gradientMain)" stroke-width="1.5" />
+
+    <!-- Símbolos de moedas com estilo refinado -->
+    <text x="-40" y="30" font-family="'Segoe UI', Helvetica, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="url(#gradientText)">R$</text>
+    <text x="0" y="30" font-family="'Segoe UI', Helvetica, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="url(#gradientText)">€</text>
+    <text x="40" y="30" font-family="'Segoe UI', Helvetica, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="url(#gradientText)">$</text>
+  </g>
+
+  <!-- Elementos decorativos sutis -->
+  <circle cx="100" cy="100" r="75" fill="none" stroke="url(#gradientMain)" stroke-width="0.5" stroke-dasharray="1,3" opacity="0.5" />
+
+  <!-- Ondas sutis representando gráficos financeiros -->
+  <path d="M50,155 Q62,148 75,152 Q88,156 100,152 Q112,148 125,152 Q138,156 150,152" fill="none" stroke="url(#gradientMain)" stroke-width="1.5" opacity="0.7" />
+</svg>
