@@ -17,6 +17,7 @@
     "scripts": {
         "post-install-cmd": [
             "composer dump-autoload --optimize"
-        ]
+        ],
+        "vercel-build": "echo 'Build script is running...'"
     }
 }
