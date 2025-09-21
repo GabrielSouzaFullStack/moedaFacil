@@ -32,21 +32,17 @@ class Router
    */
   public function __construct()
   {
-    // Detecta a URL base da aplicação
-    $this->baseUrl = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
+    // Ajuste para Vercel
+    $this->baseUrl = isset($_SERVER['HTTP_HOST']) ?
+      'https://' . $_SERVER['HTTP_HOST'] :
+      'http://localhost:8000';
 
-    // Remove a URL base para obter a rota atual
-    $path = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/';
-    $path = str_replace($this->baseUrl, '', $path);
+    $this->route = $_SERVER['REQUEST_URI'] ?? '/';
 
-    // Remove query string se existir
-    $position = strpos($path, '?');
-    if ($position !== false) {
-      $path = substr($path, 0, $position);
+    // Remove query string
+    if (($pos = strpos($this->route, '?')) !== false) {
+      $this->route = substr($this->route, 0, $pos);
     }
-
-    // Define a rota atual
-    $this->route = $path ?: '/';
   }
 
   /**
