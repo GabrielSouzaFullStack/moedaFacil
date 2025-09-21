@@ -1,12 +1,15 @@
 {
-  "functions": {
-    "api/*.php": {
-      "runtime": "vercel-php@0.6.0"
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.php",
+      "use": "vercel-php@0.6.0"
     },
-    "public/*.php": {
-      "runtime": "vercel-php@0.6.0"
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
     }
-  },
+  ],
   "routes": [
     {
       "src": "/styles/(.*)",
@@ -17,18 +20,19 @@
       "dest": "/public/img/$1"
     },
     {
+      "src": "/api/(.*)",
+      "dest": "/api/index.php"
+    },
+    {
       "src": "/(.*\\.php)",
-      "dest": "/public/$1"
+      "dest": "/api/index.php"
     },
     {
       "src": "/(.*)",
-      "dest": "/public/index.php"
+      "dest": "/api/index.php"
     }
   ],
-  "builds": [
-    {
-      "src": "public/**/*.php",
-      "use": "vercel-php@0.6.0"
-    }
-  ]
+  "env": {
+    "API_BASE_URL": "https://economia.awesomeapi.com.br/last/"
+  }
 }

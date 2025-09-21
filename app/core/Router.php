@@ -32,16 +32,26 @@ class Router
    */
   public function __construct()
   {
-    // Ajuste para Vercel
-    $this->baseUrl = isset($_SERVER['HTTP_HOST']) ?
-      'https://' . $_SERVER['HTTP_HOST'] :
-      'http://localhost:8000';
+    // Detecta se está na Vercel ou localhost
+    $isVercel = isset($_ENV['VERCEL']) || isset($_ENV['VERCEL_ENV']);
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost:8000';
+
+    if ($isVercel) {
+      $this->baseUrl = 'https://' . $host;
+    } else {
+      $this->baseUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $host;
+    }
 
     $this->route = $_SERVER['REQUEST_URI'] ?? '/';
 
     // Remove query string
     if (($pos = strpos($this->route, '?')) !== false) {
       $this->route = substr($this->route, 0, $pos);
+    }
+
+    // Remove /api prefix se estiver na Vercel
+    if ($isVercel && strpos($this->route, '/api') === 0) {
+      $this->route = substr($this->route, 4) ?: '/';
     }
   }
 
