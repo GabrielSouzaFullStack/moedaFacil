@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "build": "composer install --no-dev --optimize-autoloader && echo 'Composer install finished.'"
+  }
+}
