@@ -1,15 +1,36 @@
 {
   "version": 2,
+  "buildCommand": "bash ./build.sh",
   "builds": [
     {
       "src": "api/index.php",
       "use": "vercel-php@0.7.4"
+    },
+    {
+      "src": "api/diagnostico.php",
+      "use": "vercel-php@0.7.4"
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/(styles|img)/(.+)",
+      "src": "/diagnostico",
+      "dest": "/api/diagnostico.php"
+    },
+    {
+      "src": "/debug",
+      "dest": "/api/diagnostico.php"
+    },
+    {
+      "src": "/(css|js|img|styles)/(.+)",
       "dest": "/public/$1/$2"
+    },
+    {
+      "src": "/public/(.*)",
+      "dest": "/public/$1"
     },
     {
       "src": "/(.*)",
@@ -17,6 +38,7 @@
     }
   ],
   "env": {
-    "API_BASE_URL": "https://economia.awesomeapi.com.br/last/"
+    "API_BASE_URL": "https://economia.awesomeapi.com.br/last/",
+    "APP_ENV": "production"
   }
 }

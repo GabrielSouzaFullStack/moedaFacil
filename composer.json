@@ -9,12 +9,22 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "classmap": [
+            "app/core/"
+        ]
     },
     "config": {
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "classmap-authoritative": true
     },
     "scripts": {
-        "vercel-build": "echo 'Build script is running...'"
+        "vercel-build": "composer dump-autoload --optimize --classmap-authoritative",
+        "post-install-cmd": [
+            "composer dump-autoload --optimize --classmap-authoritative"
+        ],
+        "post-update-cmd": [
+            "composer dump-autoload --optimize --classmap-authoritative"
+        ]
     }
 }
