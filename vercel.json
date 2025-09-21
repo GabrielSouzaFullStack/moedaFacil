@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "buildCommand": "bash ./build.sh",
   "builds": [
     {
       "src": "api/index.php",
@@ -16,14 +15,6 @@
     }
   ],
   "routes": [
-    {
-      "src": "/diagnostico",
-      "dest": "/api/diagnostico.php"
-    },
-    {
-      "src": "/debug",
-      "dest": "/api/diagnostico.php"
-    },
     {
       "src": "/(css|js|img|styles)/(.+)",
       "dest": "/public/$1/$2"

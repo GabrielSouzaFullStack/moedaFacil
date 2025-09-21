@@ -1,10 +1,6 @@
 <?php
 // filepath: api/index.php
 
-// Mostra todos os erros para diagnóstico
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
 // Define o diretório base para includes
 define('BASE_DIR', dirname(__DIR__));
 
