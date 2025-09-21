@@ -1,5 +1,8 @@
 {
+  "private": true,
   "scripts": {
-    "build": "composer install --no-dev --optimize-autoloader && echo 'Composer install finished.'"
+    "build": "echo 'Starting build process...' && npm run install-composer && npm run composer-install",
+    "install-composer": "php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\" && php composer-setup.php && php -r \"unlink('composer-setup.php');\"",
+    "composer-install": "php composer.phar install --no-dev --optimize-autoloader"
   }
 }
