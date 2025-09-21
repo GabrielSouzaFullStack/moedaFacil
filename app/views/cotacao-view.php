@@ -4,11 +4,11 @@ $moedaCodigo = isset($_GET['moeda']) ? strtoupper($_GET['moeda']) : 'USD';
 
 if (isset($data[$moedaCodigo])) {
     $cotacao = $data[$moedaCodigo];
-    
+
     // Definir variáveis para o cabeçalho
     $pageTitle = 'Cotação ' . $cotacao['name'];
     $headerText = 'Cotação de ' . $cotacao['name'];
-    
+
     // Incluir o cabeçalho
     include __DIR__ . '/partials/header.php';
 ?>
@@ -24,6 +24,14 @@ if (isset($data[$moedaCodigo])) {
                 <span class="badge <?php echo (floatval($cotacao['pctChange']) >= 0) ? 'bg-success' : 'bg-danger'; ?> fs-6">
                     <?php echo (floatval($cotacao['pctChange']) >= 0) ? '+' : ''; ?><?php echo $cotacao['pctChange']; ?>%
                 </span>
+            </div>
+
+            <div class="d-flex align-items-center mb-4">
+                <i class="fas fa-clock me-2">
+                    <span class="text-danger">
+                        Última atualização: <?php echo date('d/m/Y \à\s H:i:s', strtotime($cotacao['create_date'])); ?>
+                    </span>
+                </i>
             </div>
 
             <div class="info-grid">
