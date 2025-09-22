@@ -12,12 +12,16 @@ if (!empty($data)) {
     <div class="cotacoes-owl-carousel owl-carousel owl-theme">
         <?php foreach ($data as $codigo => $moeda): ?>
             <div class="cotacao-card">
-                <h3 class="moeda-titulo"><?php echo $moeda['name']; ?></h3>
-                <div class="preco">R$ <?php echo number_format(floatval($moeda['bid']), 4, ',', '.'); ?></div>
-                <div class="info <?php echo (floatval($moeda['pctChange']) >= 0) ? 'variacao-positiva' : 'variacao-negativa'; ?>">
-                    Variação: <?php echo $moeda['pctChange']; ?>%
+                <h3 class="moeda-titulo"><?php echo $moeda['name'] ?? 'Sem nome'; ?></h3>
+                <div class="preco">R$ <?php echo number_format(floatval($moeda['bid'] ?? 0), 4, ',', '.'); ?></div>
+                <div class="info <?php echo (floatval($moeda['pctChange'] ?? 0) >= 0) ? 'variacao-positiva' : 'variacao-negativa'; ?>">
+                    Variação: <?php echo $moeda['pctChange'] ?? 0; ?>%
                 </div>
-                <span class="data-atualizacao badge bg-secondary">Atualizado: <?php echo date('d/m/Y H:i', strtotime($moeda['create_date'])); ?></span>
+                <span class="data-atualizacao badge bg-secondary">
+                    Atualizado: 
+                    <?php $dataAtualizacao = $moeda['create_date'] ?? null; ?>
+                    <?php echo date('d/m/Y H:i', strtotime($dataAtualizacao)); ?>
+                </span>
             </div>
         <?php endforeach; ?>
     </div>

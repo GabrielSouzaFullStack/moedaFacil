@@ -176,10 +176,10 @@ class Moeda
     $endpoint = self::BASE_URL . $resource;
 
     // Inicializa o CURL
-    $curl = curl_init();
+    $curl = \curl_init();
 
     // Config CURL
-    curl_setopt_array($curl, [
+    \curl_setopt_array($curl, [
       CURLOPT_URL => $endpoint,
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_CUSTOMREQUEST => 'GET'
@@ -187,26 +187,26 @@ class Moeda
 
     // Adiciona header de API Key se disponível
     if (!empty(self::$apiKey)) {
-      curl_setopt($curl, CURLOPT_HTTPHEADER, [
+      \curl_setopt($curl, CURLOPT_HTTPHEADER, [
         'x-api-key: ' . self::$apiKey
       ]);
     }
 
     // RESPONSE
-    $response = curl_exec($curl);
+    $response = \curl_exec($curl);
 
     // Verifica se houve erro na requisição
     if ($response === false) {
-      $error = curl_error($curl);
-      curl_close($curl);
+      $error = \curl_error($curl);
+      \curl_close($curl);
       throw new \Exception('Erro na requisição cURL: ' . $error);
     }
 
     // Encerra conexão CURL
-    curl_close($curl);
+    \curl_close($curl);
 
     // Decodifica o JSON
-    $data = json_decode($response, true);
+    $data = \json_decode($response, true);
 
     // Verifica se a resposta é válida
     if (json_last_error() !== JSON_ERROR_NONE) {
