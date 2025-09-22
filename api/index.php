@@ -20,8 +20,8 @@ if (file_exists(__DIR__ . '/Router.php')) {
   require_once __DIR__ . '/Router.php';
 }
 // Se não encontrar, tenta carregar do caminho padrão
-else if (file_exists(BASE_DIR . '/app/core/Router.php')) {
-  require_once BASE_DIR . '/app/core/Router.php';
+else if (file_exists(BASE_DIR . '/app/Core/Router.php')) {
+  require_once BASE_DIR . '/app/Core/Router.php';
 } else {
   die('Erro fatal: Router.php não encontrado.');
 }
