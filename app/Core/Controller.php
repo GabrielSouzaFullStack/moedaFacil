@@ -21,7 +21,7 @@ abstract class Controller
     extract($data);
 
     // Caminho para o arquivo de view
-    $viewPath = __DIR__ . '/../Views/' . $view . '.php';
+    $viewPath = __DIR__ . '/../views/' . $view . '.php';
 
     // Verifica se o arquivo existe
     if (!file_exists($viewPath)) {
