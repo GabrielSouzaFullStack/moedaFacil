@@ -9,7 +9,12 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "classmap": [
+            "app/core/",
+            "app/controllers/",
+            "app/models/"
+        ]
     },
     "config": {
         "optimize-autoloader": true,
