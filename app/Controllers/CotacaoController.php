@@ -50,7 +50,8 @@ class CotacaoController extends Controller
     if (!empty($dados)) {
       $this->render('cotacao-view', [
         'data' => $dados,
-        'nomeMoeda' => $nomeMoeda
+        'nomeMoeda' => $nomeMoeda,
+        'moedaCodigo' => $moedaParam
       ]);
     } else {
       echo '<p>Não foi possível obter dados da API. Verifique sua conexão ou a quota de requisições.</p>';

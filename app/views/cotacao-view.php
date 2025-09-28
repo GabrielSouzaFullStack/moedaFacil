@@ -1,6 +1,6 @@
 <?php
 // Determinar qual moeda está sendo exibida (usando o parâmetro da URL ou USD como padrão)
-$moedaCodigo = isset($_GET['moeda']) ? strtoupper($_GET['moeda']) : 'USD';
+$moedaCodigo = $moedaCodigo ?? (isset($_GET['moeda']) ? strtoupper($_GET['moeda']) : 'USD');
 
 if (isset($data[$moedaCodigo])) {
     $cotacao = $data[$moedaCodigo];
