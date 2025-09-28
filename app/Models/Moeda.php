@@ -46,8 +46,11 @@ class Moeda
    */
   public function __construct($codigo = null, $nome = null)
   {
-    if (isset($_ENV['API_KEY'])) {
-      self::$apiKey = $_ENV['API_KEY'];
+    // Inicializa a API Key uma única vez, sem alterar a estrutura atual
+    if (empty(self::$apiKey)) {
+      self::$apiKey = $_ENV['API_KEY']
+        ?? getenv('API_KEY')
+        ?? ($_SERVER['API_KEY'] ?? null);
     }
 
     $this->codigo = $codigo;
@@ -186,6 +189,13 @@ class Moeda
     ]);
 
     // Adiciona header de API Key se disponível
+    // Garante que a API Key foi carregada de forma resiliente
+    if (empty(self::$apiKey)) {
+      self::$apiKey = $_ENV['API_KEY']
+        ?? getenv('API_KEY')
+        ?? ($_SERVER['API_KEY'] ?? null);
+    }
+
     if (!empty(self::$apiKey)) {
       \curl_setopt($curl, CURLOPT_HTTPHEADER, [
         'x-api-key: ' . self::$apiKey

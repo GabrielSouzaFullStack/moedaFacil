@@ -18,8 +18,10 @@ class Economia
      */
     public function __construct()
     {
-        if (isset($_ENV['API_KEY'])) {
-            self::$API_KEY = $_ENV['API_KEY'];
+        if (empty(self::$API_KEY)) {
+            self::$API_KEY = $_ENV['API_KEY']
+                ?? getenv('API_KEY')
+                ?? ($_SERVER['API_KEY'] ?? null);
         }
     }
 
@@ -86,6 +88,13 @@ class Economia
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST => 'GET'
         ]);
+
+        // Garante que a API Key foi carregada
+        if (empty(self::$API_KEY)) {
+            self::$API_KEY = $_ENV['API_KEY']
+                ?? getenv('API_KEY')
+                ?? ($_SERVER['API_KEY'] ?? null);
+        }
 
         // Adiciona header de API Key se disponível
         if (!empty(self::$API_KEY)) {

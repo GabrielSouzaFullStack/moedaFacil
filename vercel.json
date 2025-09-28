@@ -30,6 +30,7 @@
   ],
   "env": {
     "API_BASE_URL": "https://economia.awesomeapi.com.br/last/",
-    "APP_ENV": "production"
+    "APP_ENV": "production",
+    "API_KEY": "c0b97f123f563bdef2cAe46001d5014b5284cefc5fe76bd40ff5abfcf6933ccda"
   }
 }
