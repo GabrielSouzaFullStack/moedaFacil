@@ -23,14 +23,33 @@ class CotacaoController extends Controller
     $moedaParam = isset($_GET['moeda']) ? strtoupper($_GET['moeda']) : $moeda;
 
     // Obter cotação da moeda
-    $data = Moeda::consultarCotacao($moedaParam);
+    $dadosBrutos = Moeda::consultarCotacao($moedaParam);
+
+    // Normaliza a estrutura para sempre ter a chave pelo código da moeda (ex: USD)
+    $dados = [];
+    if (!empty($dadosBrutos)) {
+      if (isset($dadosBrutos[$moedaParam])) {
+        $dados[$moedaParam] = $dadosBrutos[$moedaParam];
+      } elseif (isset($dadosBrutos[$moedaParam . 'BRL'])) {
+        // Alguns endpoints retornam USDBRL; reindexa para USD
+        $dados[$moedaParam] = $dadosBrutos[$moedaParam . 'BRL'];
+      } else {
+        // Reindexa usando o campo 'code' quando disponível ou os 3 primeiros caracteres da chave
+        foreach ($dadosBrutos as $chave => $valor) {
+          $codigo = isset($valor['code']) ? strtoupper($valor['code']) : strtoupper(substr($chave, 0, 3));
+          if (!empty($codigo)) {
+            $dados[$codigo] = $valor;
+          }
+        }
+      }
+    }
 
     // Nome da moeda para título da página
     $nomeMoeda = CatalogoMoedas::getNomeMoeda($moedaParam) ?: $moedaParam;
 
-    if (!empty($data)) {
+    if (!empty($dados)) {
       $this->render('cotacao-view', [
-        'data' => $data,
+        'data' => $dados,
         'nomeMoeda' => $nomeMoeda
       ]);
     } else {
@@ -61,11 +80,21 @@ class CotacaoController extends Controller
       'DOGE'
     ];
 
-    $data = Moeda::consultarMultiplasCotacoes($moedas);
+    $dadosBrutos = Moeda::consultarMultiplasCotacoes($moedas);
+    // Normaliza as chaves para o código de 3 letras
+    $dados = [];
+    if (!empty($dadosBrutos)) {
+      foreach ($dadosBrutos as $chave => $valor) {
+        $codigo = isset($valor['code']) ? strtoupper($valor['code']) : strtoupper(substr($chave, 0, 3));
+        if (!empty($codigo)) {
+          $dados[$codigo] = $valor;
+        }
+      }
+    }
 
-    if (!empty($data)) {
+    if (!empty($dados)) {
       $this->render('multiplas-cotacoes-view', [
-        'data' => $data
+        'data' => $dados
       ]);
     } else {
       echo '<p>Não foi possível obter dados da API. Verifique sua conexão ou a quota de requisições.</p>';
